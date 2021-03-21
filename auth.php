@@ -10,9 +10,10 @@ if (isset($_POST['button-auth'])) {
         session_start();
         $_SESSION['login'] = $login;
         header('Location: user.php');
+        exit();
     }
     else{
-        echo "такого пользователя не существует";
+        echo "Такого пользователя не существует";
     }
 }
 ?>

@@ -1,8 +1,10 @@
 <?php
 require_once("php\connection.php");
 session_start();
-echo $_SESSION['login'];
-echo "kek";
+if(empty($_SESSION['login'])){
+    header('Location: index.php');
+    exit();
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">

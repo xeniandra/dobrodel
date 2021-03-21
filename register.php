@@ -1,24 +1,31 @@
 <?php
 require_once("php\connection.php");
-echo $_SESSION['login'];
 if (isset($_POST['button-reg'])) {
-
     $fio = $_POST['fio'];
     $login = $_POST['login'];
     $email = $_POST['email'];
     $password = $_POST['password'];
     $passwordTwo = $_POST['passwordTwo'];
     $errorPass = 0;
-    if($password == $passwordTwo){
-        $password = $password;
-        $reg = "INSERT INTO `users` (`id_user`, `fio`, `login`, `email`, `password`, `role`) VALUES 
-    (NULL, '$fio', '$login', '$email', '$password', '1');";
-    $regInsert = mysqli_query($link, $reg);
-    header('Location: auth.php');
+    $queryLogin = mysqli_query($link, "SELECT `login` FROM `users` WHERE `login` = '$login'");
+    $checkLogin = mysqli_num_rows($queryLogin);
+    $queryEmail = mysqli_query($link, "SELECT `email` FROM `users` WHERE `email` = '$email'");
+    $checkEmail = mysqli_num_rows($queryEmail);
+    if($checkLogin == 0 && $checkEmail == 0){
+        if($password == $passwordTwo){
+            $password = $password;
+            $reg = "INSERT INTO `users` (`id_user`, `fio`, `login`, `email`, `password`, `role`) VALUES 
+        (NULL, '$fio', '$login', '$email', '$password', '1');";
+        $regInsert = mysqli_query($link, $reg);
+        header('Location: auth.php');
+        }
+        else{
+            $errorPass = true;
+            echo "пароли не совпадают";
+        }
     }
     else{
-        $errorPass = true;
-        echo "пароли не совпадают";
+        echo "такой пользователь уже есть";
     }
 }
 ?>
