@@ -1,3 +1,9 @@
+<?php
+require_once("php\connection.php");
+session_start();
+echo $_SESSION['login'];
+echo "kek";
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,7 +17,7 @@
 </head>
 <body>
     <header>
-        <a href="index.html" class="logo-main"><img src="media\logo.png" alt="logo" class="logo" title="На главную"></a> 
+        <a href="index.php" class="logo-main"><img src="media\logo.png" alt="logo" class="logo" title="На главную"></a> 
         <div class="title">
             <h1 class="title">Сделаем лучше вместе!</h1>
             <h2 class="title">портал добрых дел</h2>    
@@ -21,7 +27,7 @@
         <div class="good-deals">
                     <div class="container-out">
                         <div class="buttons-deals">
-                            <a href="#" class="login">ВЫХОД</a>
+                            <a href="php\logout.php" class="login">ВЫХОД</a>
                         </div>        
                     </div>
         </div>

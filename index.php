@@ -1,3 +1,10 @@
+<?php
+require_once("php\connection.php");
+session_start();
+
+echo $_SESSION['login'];
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,7 +17,7 @@
 </head>
 <body>
     <header>
-        <a href="index.html" class="logo-main"><img src="media\logo.png" alt="logo" class="logo" title="На главную"></a> 
+        <a href="index.php" class="logo-main"><img src="media\logo.png" alt="logo" class="logo" title="На главную"></a> 
         <div class="title">
             <h1 class="title">Сделаем лучше вместе!</h1>
             <h2 class="title">портал добрых дел</h2>    
@@ -25,7 +32,7 @@
                     </div>
                     <div class="buttons-deals">
                         <a href="register.php" class="reg">РЕГИСТРАЦИЯ</a>
-                        <a href="#" class="login">ВХОД</a>
+                        <a href="auth.php" class="login">ВХОД</a>
                     </div>        
             </div>
         </div>

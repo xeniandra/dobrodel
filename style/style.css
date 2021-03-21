@@ -292,6 +292,28 @@ a.download-img{
 div.reg-title{
     justify-content: center;
 }
+/* auth */
+form.reg{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+form.reg input{
+    padding: 11px 15px;
+    width: 250px;
+    margin-bottom: 15px;
+    font-size: 18px;
+}
+a.already-reg{
+    font-size: 24px;
+    text-decoration: none;
+    color: #0b6357;
+    display: flex;
+    padding: 4px 10px;
+    margin-top: 10px;
+    border: 2px dotted #0B6357;
+}
 @media screen and (max-width: 720px){
     header, div.container, div.container-send, div.container-admin, div.container-out, div.last-good-deal {
         max-width: 600px;

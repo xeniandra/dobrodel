@@ -1,36 +1,29 @@
 <?php
 require_once("php\connection.php");
-echo $_SESSION['login'];
-if (isset($_POST['button-reg'])) {
-
-    $fio = $_POST['fio'];
+if (isset($_POST['button-auth'])) {
     $login = $_POST['login'];
-    $email = $_POST['email'];
     $password = $_POST['password'];
-    $passwordTwo = $_POST['passwordTwo'];
-    $errorPass = 0;
-    if($password == $passwordTwo){
-        $password = $password;
-        $reg = "INSERT INTO `users` (`id_user`, `fio`, `login`, `email`, `password`, `role`) VALUES 
-    (NULL, '$fio', '$login', '$email', '$password', '1');";
-    $regInsert = mysqli_query($link, $reg);
-    header('Location: auth.php');
+    $queryUser = mysqli_query($link, "SELECT `login`, `password` FROM `users` WHERE `login` = '$login' 
+    AND `password` = '$password';");
+    $user = mysqli_num_rows($queryUser);
+    if ($user == 1) {
+        session_start();
+        $_SESSION['login'] = $login;
+        header('Location: user.php');
     }
     else{
-        $errorPass = true;
-        echo "пароли не совпадают";
+        echo "такого пользователя не существует";
     }
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Регистрация</title>
     <link rel="stylesheet" href="style\style.css">
+    <title>Авторизация</title>
 </head>
 <body>
 <header>
@@ -40,29 +33,24 @@ if (isset($_POST['button-reg'])) {
             <h2 class="title">портал добрых дел</h2>    
         </div>
 </header>
-    <main>
-    <div class="good-deals">
+<main>
+<div class="good-deals">
         <div class="container-admin reg-title">
-            <p class="admin">РЕГИСТРАЦИЯ</p>
+            <p class="admin">АВТОРИЗАЦИЯ</p>
         </div>
     </div>
 
     <div class="last-good-deal">
         <form action="#" class="reg" method="POST">
-            <input type="text" name="fio" placeholder="Введите ФИО" required>
             <input type="text" name="login" placeholder="Введите логин" required>
-            <input type="email" name="email" placeholder="Введите email" required>
             <input type="password" name="password" placeholder="Введите пароль" required>
-            <input type="password" name="passwordTwo" placeholder="Повторите пароль" required>
-            <input type="checkbox" name="check" required>
-            <input type="submit" value="Зарегистривоваться" name="button-reg">
+            <input type="submit" value="Войти" name="button-auth">
         </form>
-        <a href="auth.php" class="already-reg">К авторизации</a>
-
+        <a href="register.php" class="already-reg">К регистрации</a>
     </div>
 
-    </main>
-    <footer>
+</main>
+<footer>
     <div class="container-send">
             <h3 class="send-us">Cвяжитесь с нами</h3>
             <div class="links">
@@ -73,5 +61,6 @@ if (isset($_POST['button-reg'])) {
             </div>
         </div>
     </footer>
+
 </body>
 </html>
